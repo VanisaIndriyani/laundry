@@ -245,7 +245,7 @@
     <!-- Sidebar -->
     <div class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <a href="/admin/dashboard" class="sidebar-brand">
+            <a href="{{ route('admin.dashboard') }}" class="sidebar-brand">
                 <i class="bi bi-droplet-fill"></i>
                 LaundryKu
             </a>
@@ -261,7 +261,7 @@
         
         <nav class="sidebar-nav">
             <div class="nav-item">
-                <a href="/admin/dashboard" class="nav-link {{ request()->is('admin/dashboard') ? 'active' : '' }}">
+                <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->is('admin/dashboard') ? 'active' : '' }}">
                     <i class="bi bi-speedometer2"></i>
                     <span class="nav-text">Dashboard</span>
                 </a>
