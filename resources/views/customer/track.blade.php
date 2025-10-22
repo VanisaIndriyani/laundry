@@ -7,7 +7,7 @@
                 <p class="content-subtitle">Masukkan kode pesanan untuk melihat status laundry Anda</p>
             </div>
             <div>
-                <a href="/logout" class="btn btn-outline-danger">
+                <a href="{{ route('logout') }}" class="btn btn-outline-danger">
                     <i class="bi bi-box-arrow-right me-1"></i> Logout
                 </a>
             </div>
