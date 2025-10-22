@@ -10,7 +10,7 @@ class OrderSeeder extends Seeder
 {
     public function run(): void
     {
-        $now = now();
+        $now = now()->setDate(2025, 10, 1); // Menggunakan tanggal 1 Oktober 2025
         $orders = [
             [
                 'customer_name' => 'Andi',
@@ -45,6 +45,28 @@ class OrderSeeder extends Seeder
                 'quantity' => 3,
                 'total_price' => 60000,
                 'notes' => 'Siap diambil',
+            ],
+            [
+                'customer_name' => 'Rina',
+                'phone' => '082112233445',
+                'items' => 'T-shirt x3, Jeans x1',
+                'status' => 'received',
+                'received_at' => $now->copy()->subDays(2),
+                'due_at' => $now->copy()->addDays(3),
+                'quantity' => 4,
+                'total_price' => 90000,
+                'notes' => 'Urgent, harap cepat',
+            ],
+            [
+                'customer_name' => 'Joko',
+                'phone' => '083334455667',
+                'items' => 'Baju Anak x4, Jaket x2',
+                'status' => 'washing',
+                'received_at' => $now->copy()->subDays(1),
+                'due_at' => $now->copy()->addDays(2),
+                'quantity' => 6,
+                'total_price' => 75000,
+                'notes' => 'Untuk anak-anak',
             ],
         ];
 

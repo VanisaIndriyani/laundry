@@ -20,7 +20,7 @@
                         <label class="form-label">Tanggal Selesai</label>
                         <input type="date" name="end_date" value="{{ $end }}" class="form-control">
                     </div>
-                    <div class="col-12 col-md-3">
+                    <div class="col-12 col-md-2">
                         <label class="form-label">Status</label>
                         <select name="status" class="form-select">
                             @php $statuses = ['' => 'Semua', 'received' => 'Diterima', 'washing' => 'Dicuci', 'drying' => 'Pengeringan', 'ironing' => 'Disetrika', 'ready' => 'Siap Diambil', 'picked_up' => 'Diambil']; @endphp
@@ -37,8 +37,13 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-6 col-md-1 d-grid">
-                        <button class="btn btn-primary">Filter</button>
+                    <div class="col-12 col-md-2 d-flex justify-content-end gap-2">
+                        <button class="btn btn-primary" type="submit">
+                            <i class="bi bi-funnel me-1"></i>Filter
+                        </button>
+                        <a href="{{ route('admin.reports') }}" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+                        </a>
                     </div>
                 </form>
             </div>

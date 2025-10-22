@@ -5,10 +5,12 @@
             <h1 class="content-title mb-2">Dashboard Admin</h1>
             <p class="content-subtitle">Kelola operasional laundry dan pantau kinerja bisnis</p>
         </div>
-        <div class="d-flex gap-2">
-            <a href="?days=7" class="btn btn-sm btn-outline-light {{ request('days', 30) == 7 ? 'active' : '' }}">7 Hari</a>
-            <a href="?days=30" class="btn btn-sm btn-outline-light {{ request('days', 30) == 30 ? 'active' : '' }}">30 Hari</a>
-            <a href="?days=90" class="btn btn-sm btn-outline-light {{ request('days', 30) == 90 ? 'active' : '' }}">90 Hari</a>
+        <div class="d-flex align-items-center gap-2">
+            <span class="text-muted">Periode:</span>
+            <a href="?days=7" class="btn btn-sm btn-outline-primary {{ request('days', 30) == 7 ? 'active' : '' }}">7 Hari</a>
+            <a href="?days=30" class="btn btn-sm btn-outline-primary {{ request('days', 30) == 30 ? 'active' : '' }}">30 Hari</a>
+            <a href="?days=90" class="btn btn-sm btn-outline-primary {{ request('days', 30) == 90 ? 'active' : '' }}">90 Hari</a>
+            <span class="badge bg-primary">{{ request('days', 30) }} Hari</span>
         </div>
     </div>
 
@@ -54,34 +56,18 @@
             </div>
         </div>
         
-        <!-- Expenses -->
-        <div class="col-lg-3 col-md-6">
+      
+
+        <!-- Status Pesanan (dipindah ke baris atas) -->
+        <div class="col-lg-6 col-md-6">
             <div class="card card-custom h-100">
-                <div class="card-body text-center p-4">
-                    <div class="mb-3">
-                        <i class="bi bi-graph-down" style="font-size: 2.5rem; color: #ef4444;"></i>
-                    </div>
-                    <h3 class="fw-bold text-danger">Rp {{ number_format($totalExpense, 0, ',', '.') }}</h3>
-                    <p class="text-muted mb-0">Total Pengeluaran</p>
-                    <small class="text-danger">
-                        <i class="bi bi-arrow-up"></i> {{ $expenseChange }}% dari bulan lalu
-                    </small>
+                <div class="card-header bg-white border-0">
+                    <h6 class="fw-bold mb-0" style="color: var(--primary-blue);">
+                        <i class="bi bi-pie-chart me-2"></i>Status Pesanan
+                    </h6>
                 </div>
-            </div>
-        </div>
-        
-        <!-- Net Profit -->
-        <div class="col-lg-3 col-md-6">
-            <div class="card card-custom h-100">
                 <div class="card-body text-center p-4">
-                    <div class="mb-3">
-                        <i class="bi bi-graph-up-arrow" style="font-size: 2.5rem; color: var(--accent-blue);"></i>
-                    </div>
-                    <h3 class="fw-bold" style="color: var(--primary-blue);">Rp {{ number_format($net, 0, ',', '.') }}</h3>
-                    <p class="text-muted mb-0">Keuntungan Bersih</p>
-                    <small class="text-success">
-                        <i class="bi bi-arrow-up"></i> {{ $profitChange }}% dari bulan lalu
-                    </small>
+                    <canvas id="statusChart" height="220"></canvas>
                 </div>
             </div>
         </div>
@@ -90,35 +76,20 @@
     <!-- Charts and Analytics -->
     <div class="row g-4 mb-4">
         <!-- Revenue Chart -->
-        <div class="col-lg-8">
+        <div class="col-lg-12">
             <div class="card card-custom">
                 <div class="card-header bg-white border-0">
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="fw-bold mb-0" style="color: var(--primary-blue);">
-                            <i class="bi bi-graph-up me-2"></i>Grafik Pendapatan & Pengeluaran
+                            <i class="bi bi-graph-up me-2"></i>Grafik Pendapatan
                         </h5>
                         <div class="d-flex gap-2">
                             <span class="badge bg-success">Pendapatan</span>
-                            {{-- Pengeluaran dihapus --}}
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <canvas id="revenueChart" height="100"></canvas>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Order Status Distribution -->
-        <div class="col-lg-4">
-            <div class="card card-custom">
-                <div class="card-header bg-white border-0">
-                    <h5 class="fw-bold mb-0" style="color: var(--primary-blue);">
-                        <i class="bi bi-pie-chart me-2"></i>Status Pesanan
-                    </h5>
-                </div>
-                <div class="card-body">
-                    <canvas id="statusChart" height="200"></canvas>
                 </div>
             </div>
         </div>
@@ -257,7 +228,7 @@
         // Sample data - will be replaced with actual data from controller
         const labels = @json($labels);
         const incomeData = @json($incomeData);
-        const expenseData = @json($expenseData);
+        // expenseData dihapus; hanya menampilkan dataset pendapatan
 
         // Revenue Chart (Combined Income & Expense)
         const revenueCtx = document.getElementById('revenueChart').getContext('2d');
