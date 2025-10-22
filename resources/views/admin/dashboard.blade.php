@@ -182,16 +182,16 @@
                 </div>
                 <div class="card-body">
                     <div class="d-grid gap-3">
-                        <a href="/admin/orders/create" class="btn btn-primary-custom">
+                        <a href="{{ route('admin.orders.create') }}" class="btn btn-primary-custom">
                             <i class="bi bi-plus-lg me-2"></i>Tambah Pesanan Baru
                         </a>
                         <a href="{{ route('admin.orders') }}" class="btn btn-outline-primary">
                             <i class="bi bi-list-ul me-2"></i>Kelola Pesanan
                         </a>
-                        <a href="/admin/customers" class="btn btn-outline-primary">
+                        <a href="{{ route('admin.customers') }}" class="btn btn-outline-primary">
                             <i class="bi bi-people me-2"></i>Data Pelanggan
                         </a>
-                        <a href="/admin/reports" class="btn btn-outline-primary">
+                        <a href="{{ route('admin.reports') }}" class="btn btn-outline-primary">
                             <i class="bi bi-graph-up me-2"></i>Laporan Lengkap
                         </a>
                     </div>
