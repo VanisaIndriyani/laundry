@@ -99,7 +99,7 @@
                         </h5>
                         <div class="d-flex gap-2">
                             <span class="badge bg-success">Pendapatan</span>
-                            <span class="badge bg-danger">Pengeluaran</span>
+                            {{-- Pengeluaran dihapus --}}
                         </div>
                     </div>
                 </div>
@@ -214,7 +214,7 @@
                         <a href="/admin/orders/create" class="btn btn-primary-custom">
                             <i class="bi bi-plus-lg me-2"></i>Tambah Pesanan Baru
                         </a>
-                        <a href="/admin/orders" class="btn btn-outline-primary">
+                        <a href="{{ route('admin.orders') }}" class="btn btn-outline-primary">
                             <i class="bi bi-list-ul me-2"></i>Kelola Pesanan
                         </a>
                         <a href="/admin/customers" class="btn btn-outline-primary">
@@ -270,14 +270,6 @@
                     data: incomeData,
                     borderColor: '#10b981',
                     backgroundColor: 'rgba(16, 185, 129, 0.1)',
-                    borderWidth: 3,
-                    fill: true,
-                    tension: 0.4
-                }, {
-                    label: 'Pengeluaran',
-                    data: expenseData,
-                    borderColor: '#ef4444',
-                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
                     borderWidth: 3,
                     fill: true,
                     tension: 0.4

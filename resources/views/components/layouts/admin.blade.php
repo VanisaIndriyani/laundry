@@ -268,21 +268,21 @@
             </div>
             
             <div class="nav-item">
-                <a href="/admin/orders" class="nav-link {{ request()->is('admin/orders*') ? 'active' : '' }}">
+                <a href="{{ route('admin.orders') }}" class="nav-link {{ request()->is('admin/orders*') ? 'active' : '' }}">
                     <i class="bi bi-basket3"></i>
                     <span class="nav-text">Kelola Pesanan</span>
                 </a>
             </div>
             
             <div class="nav-item">
-                <a href="/admin/customers" class="nav-link {{ request()->is('admin/customers*') ? 'active' : '' }}">
+                <a href="{{ route('admin.customers') }}" class="nav-link {{ request()->is('admin/customers*') ? 'active' : '' }}">
                     <i class="bi bi-people"></i>
                     <span class="nav-text">Data Pelanggan</span>
                 </a>
             </div>
             
             <div class="nav-item">
-                <a href="/admin/reports" class="nav-link {{ request()->is('admin/reports*') ? 'active' : '' }}">
+                <a href="{{ route('admin.reports') }}" class="nav-link {{ request()->is('admin/reports*') ? 'active' : '' }}">
                     <i class="bi bi-graph-up"></i>
                     <span class="nav-text">Laporan</span>
                 </a>

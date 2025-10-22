@@ -172,83 +172,58 @@ class AdminController extends Controller
         $this->ensureAdmin();
         $days = (int)($request->input('days', 30));
         if ($days <= 0) { $days = 30; }
-        $costPerKg = (float)env('LAUNDRY_COST_PER_KG', 5000);
-    
+
         $startDate = now()->startOfDay()->subDays($days - 1);
         $endDate = now()->endOfDay();
-    
+
         $orders = Order::whereBetween('created_at', [$startDate, $endDate])->get();
-        $allOrders = Order::all(); // For total statistics
-    
-        // Generate chart data for the last 7 days
+        $allOrders = Order::all();
+
         $chartLabels = [];
         $incomeData = [];
-        $expenseData = [];
-    
+
         for ($i = 6; $i >= 0; $i--) {
             $date = now()->subDays($i);
             $key = $date->format('Y-m-d');
-            $chartLabels[] = $date->format('D'); // Mon, Tue, etc.
-            
+            $chartLabels[] = $date->format('D');
+
             $dailyOrders = $orders->filter(function ($o) use ($key) {
                 return $o->created_at && $o->created_at->format('Y-m-d') === $key;
             });
-            
+
             $income = $dailyOrders->sum(function ($o) {
                 return (float)($o->total_price ?? 0);
             });
-            $expense = $dailyOrders->sum(function ($o) use ($costPerKg) {
-                return ((int)($o->quantity ?? 0)) * $costPerKg;
-            });
-            
+
             $incomeData[] = round($income, 2);
-            $expenseData[] = round($expense, 2);
         }
-    
-        // Calculate totals for the selected period
+
         $totalIncome = $orders->sum(function ($o) {
             return (float)($o->total_price ?? 0);
         });
-        $totalExpense = $orders->sum(function ($o) use ($costPerKg) {
-            return ((int)($o->quantity ?? 0)) * $costPerKg;
-        });
-        $net = $totalIncome - $totalExpense;
-        
-        // Calculate total orders
         $totalOrders = $orders->count();
-        
-        // Calculate order status distribution
+
         $statusCounts = [
-            'pending' => $allOrders->whereIn('status', ['received', 'washing', 'drying', 'ironing'])->count(),
+            'pending' => $allOrders->whereIn('status', ['received','washing','drying','ironing'])->count(),
             'ready' => $allOrders->where('status', 'ready')->count(),
             'completed' => $allOrders->where('status', 'picked_up')->count(),
         ];
-        
-        // Get recent orders (last 10)
+
         $recentOrders = Order::latest()->take(10)->get();
-        
-        // Calculate percentage changes (mock data for now)
+
         $orderChange = '+12.5';
         $revenueChange = '+8.2';
-        $expenseChange = '+5.1';
-        $profitChange = '+15.3';
-    
+
         return view('admin.dashboard', [
             'labels' => $chartLabels,
             'incomeData' => $incomeData,
-            'expenseData' => $expenseData,
             'days' => $days,
             'totalIncome' => $totalIncome,
-            'totalExpense' => $totalExpense,
-            'net' => $net,
             'totalOrders' => $totalOrders,
             'statusCounts' => $statusCounts,
             'recentOrders' => $recentOrders,
             'orderChange' => $orderChange,
             'revenueChange' => $revenueChange,
-            'expenseChange' => $expenseChange,
-            'profitChange' => $profitChange,
-            'costPerKg' => $costPerKg,
         ]);
     }
 

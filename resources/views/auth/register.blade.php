@@ -115,7 +115,7 @@
                                 </button>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
-                                <a href="/login" class="helper-link">Sudah punya akun? Masuk</a>
+                                <a href="{{ route('login') }}" class="helper-link">Sudah punya akun? Masuk</a>
                                 <a href="{{ route('admin.login') }}" class="text-secondary text-decoration-none"><i class="bi bi-gear me-1"></i>Akses Admin</a>
                             </div>
                         </form>

@@ -100,8 +100,8 @@
                                 </button>
                             </div>
                             <div class="d-flex justify-content-between align-items-center">
-                                <a href="/register" class="helper-link">Daftar</a>
-                                <a href="{{ route('admin.login') }}" class="text-secondary text-decoration-none"><i class="bi bi-gear me-1"></i>Akses Admin</a>
+                                <a href="{{ url('register') }}" class="helper-link">Daftar</a>
+                                <a href="{{ url('admin/login') }}" class="text-secondary text-decoration-none"><i class="bi bi-gear me-1"></i>Akses Admin</a>
                             </div>
                         </form>
                     </div>
