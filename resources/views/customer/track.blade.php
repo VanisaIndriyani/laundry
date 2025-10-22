@@ -26,14 +26,12 @@
             <div class="col-lg-8">
                 <div class="card card-custom">
                     <div class="card-body p-4">
-                        <form method="POST" action="/track">
+                        <form method="POST" action="{{ route('track.post') }}">
                             @csrf
                             <div class="mb-4">
                                 <label for="order_code" class="form-label fw-bold">Kode Pesanan</label>
                                 <div class="input-group input-group-lg">
-                                    <span class="input-group-text">
-                                        <i class="bi bi-search"></i>
-                                    </span>
+                                    <span class="input-group-text"><i class="bi bi-search"></i></span>
                                     <input type="text" 
                                            class="form-control @error('order_code') is-invalid @enderror" 
                                            id="order_code" 
